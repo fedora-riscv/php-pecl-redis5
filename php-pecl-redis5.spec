@@ -23,7 +23,7 @@
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
 %global upstream_version 5.0.0
-%global upstream_prever  RC1
+%global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
@@ -278,6 +278,9 @@ exit $ret
 
 
 %changelog
+* Wed Jun 26 2019 Remi Collet <remi@remirepo.net> - 5.0.0~RC2-1
+- update to 5.0.0RC2
+
 * Thu Jun 20 2019 Remi Collet <remi@remirepo.net> - 5.0.0~RC1-1
 - update to 5.0.0RC1
 - rename to php-pecl-redis5
