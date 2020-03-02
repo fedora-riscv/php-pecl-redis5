@@ -3,7 +3,7 @@
 #
 # remirepo spec file for php-pecl-redis5
 #
-# Copyright (c) 2012-2019 Remi Collet
+# Copyright (c) 2012-2020 Remi Collet
 # License: CC-BY-SA
 # http://creativecommons.org/licenses/by-sa/4.0/
 #
@@ -22,25 +22,23 @@
 %endif
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.1.1
+%global upstream_version 5.2.1
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
 Release:       1%{?dist}
-Source0:       http://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
+Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
-URL:           http://pecl.php.net/package/redis
+URL:           https://pecl.php.net/package/redis
 
 BuildRequires: gcc
 BuildRequires: php-devel > 7
 BuildRequires: php-pear
 BuildRequires: php-json
 BuildRequires: php-pecl-igbinary-devel
-%ifnarch ppc64
 BuildRequires: php-pecl-msgpack-devel >= 2.0.3
-%endif
 BuildRequires: liblzf-devel
 BuildRequires: libzstd-devel >= 1.3.0
 # to run Test suite
@@ -52,9 +50,7 @@ Requires:      php(zend-abi) = %{php_zend_api}
 Requires:      php(api) = %{php_core_api}
 Requires:      php-json%{?_isa}
 Requires:      php-pecl(igbinary)%{?_isa}
-%ifnarch ppc64
 Requires:      php-pecl-msgpack%{?_isa}
-%endif
 
 Obsoletes:     php-%{pecl_name}               < 3
 Provides:      php-%{pecl_name}               = %{version}
@@ -161,9 +157,7 @@ cd NTS
     --enable-redis \
     --enable-redis-session \
     --enable-redis-igbinary \
-%ifnarch ppc64
     --enable-redis-msgpack \
-%endif
     --enable-redis-lzf \
     --with-liblzf \
     --enable-redis-zstd \
@@ -178,9 +172,7 @@ cd ../ZTS
     --enable-redis \
     --enable-redis-session \
     --enable-redis-igbinary \
-%ifnarch ppc64
     --enable-redis-msgpack \
-%endif
     --enable-redis-lzf \
     --with-liblzf \
     --enable-redis-zstd \
@@ -217,9 +209,7 @@ done
 # simple module load test
 DEPS="--no-php-ini  --define extension=json.so"
 DEPS="$DEPS --define extension=igbinary.so"
-%ifnarch ppc64
-    DEPS="$DEPS --define extension=msgpack.so"
-%endif
+DEPS="$DEPS --define extension=msgpack.so"
 
 %{__php} $DEPS \
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
@@ -283,6 +273,12 @@ exit $ret
 
 
 %changelog
+* Fri Mar 20 2020 Remi Collet <remi@remirepo.net> - 5.2.1-1
+- update to 5.2.1
+
+* Mon Mar  2 2020 Remi Collet <remi@remirepo.net> - 5.2.0-1
+- update to 5.2.0
+
 * Mon Nov 12 2019 Remi Collet <remi@remirepo.net> - 5.1.1-1
 - update to 5.1.1
 
