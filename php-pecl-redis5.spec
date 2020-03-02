@@ -3,7 +3,7 @@
 #
 # remirepo spec file for php-pecl-redis5
 #
-# Copyright (c) 2012-2019 Remi Collet
+# Copyright (c) 2012-2020 Remi Collet
 # License: CC-BY-SA
 # http://creativecommons.org/licenses/by-sa/4.0/
 #
@@ -22,16 +22,16 @@
 %endif
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.1.1
+%global upstream_version 5.2.0
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
 Release:       1%{?dist}
-Source0:       http://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
+Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
-URL:           http://pecl.php.net/package/redis
+URL:           https://pecl.php.net/package/redis
 
 BuildRequires: gcc
 BuildRequires: php-devel > 7
@@ -283,6 +283,9 @@ exit $ret
 
 
 %changelog
+* Mon Mar  2 2020 Remi Collet <remi@remirepo.net> - 5.2.0-1
+- update to 5.2.0
+
 * Mon Nov 12 2019 Remi Collet <remi@remirepo.net> - 5.1.1-1
 - update to 5.1.1
 
