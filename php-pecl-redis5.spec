@@ -38,9 +38,7 @@ BuildRequires: php-devel > 7
 BuildRequires: php-pear
 BuildRequires: php-json
 BuildRequires: php-pecl-igbinary-devel
-%ifnarch ppc64
 BuildRequires: php-pecl-msgpack-devel >= 2.0.3
-%endif
 BuildRequires: liblzf-devel
 BuildRequires: libzstd-devel >= 1.3.0
 # to run Test suite
@@ -52,9 +50,7 @@ Requires:      php(zend-abi) = %{php_zend_api}
 Requires:      php(api) = %{php_core_api}
 Requires:      php-json%{?_isa}
 Requires:      php-pecl(igbinary)%{?_isa}
-%ifnarch ppc64
 Requires:      php-pecl-msgpack%{?_isa}
-%endif
 
 Obsoletes:     php-%{pecl_name}               < 3
 Provides:      php-%{pecl_name}               = %{version}
@@ -161,9 +157,7 @@ cd NTS
     --enable-redis \
     --enable-redis-session \
     --enable-redis-igbinary \
-%ifnarch ppc64
     --enable-redis-msgpack \
-%endif
     --enable-redis-lzf \
     --with-liblzf \
     --enable-redis-zstd \
@@ -178,9 +172,7 @@ cd ../ZTS
     --enable-redis \
     --enable-redis-session \
     --enable-redis-igbinary \
-%ifnarch ppc64
     --enable-redis-msgpack \
-%endif
     --enable-redis-lzf \
     --with-liblzf \
     --enable-redis-zstd \
@@ -217,9 +209,7 @@ done
 # simple module load test
 DEPS="--no-php-ini  --define extension=json.so"
 DEPS="$DEPS --define extension=igbinary.so"
-%ifnarch ppc64
-    DEPS="$DEPS --define extension=msgpack.so"
-%endif
+DEPS="$DEPS --define extension=msgpack.so"
 
 %{__php} $DEPS \
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
