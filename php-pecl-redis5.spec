@@ -294,7 +294,7 @@ exit $ret
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.1.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
-* Mon Nov 12 2019 Remi Collet <remi@remirepo.net> - 5.1.1-1
+* Tue Nov 12 2019 Remi Collet <remi@remirepo.net> - 5.1.1-1
 - update to 5.1.1
 
 * Mon Nov  4 2019 Remi Collet <remi@remirepo.net> - 5.1.0-1
