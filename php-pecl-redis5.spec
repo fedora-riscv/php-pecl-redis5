@@ -18,7 +18,11 @@
 %ifarch s390x
 %bcond_with         tests
 %else
+%if 0%{?fedora} >= 33
 %bcond_without      tests
+%else
+%bcond_with         tests
+%endif
 %endif
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
@@ -44,7 +48,7 @@ BuildRequires: pkgconfig(libzstd) >= 1.3.0
 BuildRequires: pkgconfig(liblz4)
 # to run Test suite
 %if %{with tests}
-BuildRequires: redis >= 3
+BuildRequires: redis >= 6
 %endif
 
 Requires:      php(zend-abi) = %{php_zend_api}
