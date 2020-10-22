@@ -22,13 +22,13 @@
 %endif
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.1
+%global upstream_version 5.3.2
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       2%{?dist}
+Release:       1%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
@@ -214,7 +214,10 @@ done
 
 %check
 # simple module load test
-DEPS="--no-php-ini  --define extension=json.so"
+DEPS="--no-php-ini"
+%if "%{php_version}" < "8.0"
+DEPS="$DEPS --define extension=json.so"
+%endif
 DEPS="$DEPS --define extension=igbinary.so"
 DEPS="$DEPS --define extension=msgpack.so"
 
@@ -280,6 +283,9 @@ exit $ret
 
 
 %changelog
+* Thu Oct 22 2020 Remi Collet <remi@remirepo.net> - 5.3.2-1
+- update to 5.3.2
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 5.3.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
