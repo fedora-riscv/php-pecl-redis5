@@ -3,7 +3,7 @@
 #
 # remirepo spec file for php-pecl-redis5
 #
-# Copyright (c) 2012-2020 Remi Collet
+# Copyright (c) 2012-2021 Remi Collet
 # License: CC-BY-SA
 # http://creativecommons.org/licenses/by-sa/4.0/
 #
@@ -37,8 +37,9 @@ Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstr
 License:       PHP
 URL:           https://pecl.php.net/package/redis
 
+BuildRequires: make
 BuildRequires: gcc
-BuildRequires: php-devel > 7
+BuildRequires: php-devel >= 7.0
 BuildRequires: php-pear
 BuildRequires: php-json
 BuildRequires: php-pecl-igbinary-devel
@@ -287,6 +288,9 @@ exit $ret
 
 
 %changelog
+* Wed Feb  3 2021 Remi Collet <remi@remirepo.net> - 5.3.3-1
+- update to 5.3.3
+
 * Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.3.2-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
