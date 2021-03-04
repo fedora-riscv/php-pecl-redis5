@@ -32,7 +32,7 @@
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       1%{?dist}
+Release:       2%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
@@ -288,6 +288,9 @@ exit $ret
 
 
 %changelog
+* Thu Mar  4 2021 Remi Collet <remi@remirepo.net> - 5.3.3-2
+- rebuild for https://fedoraproject.org/wiki/Changes/php80
+
 * Wed Feb  3 2021 Remi Collet <remi@remirepo.net> - 5.3.3-1
 - update to 5.3.3
 
