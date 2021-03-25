@@ -37,6 +37,8 @@ Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstr
 License:       PHP
 URL:           https://pecl.php.net/package/redis
 
+Patch0:        %{pecl_name}-32-bit.patch
+
 BuildRequires: make
 BuildRequires: gcc
 BuildRequires: php-devel >= 7.0
@@ -101,6 +103,7 @@ sed -e 's/role="test"/role="src"/' \
 cd NTS
 # Use system library
 rm -r liblzf
+%patch0 -p1
 
 # Sanity check, really often broken
 extver=$(sed -n '/#define PHP_REDIS_VERSION/{s/.* "//;s/".*$//;p}' php_redis.h)
@@ -290,6 +293,8 @@ exit $ret
 %changelog
 * Thu Mar 25 2021 Remi Collet <remi@remirepo.net> - 5.3.4-1
 - update to 5.3.4
+- add patch for 32-bit build from
+  https://github.com/phpredis/phpredis/pull/1957
 
 * Wed Feb  3 2021 Remi Collet <remi@remirepo.net> - 5.3.3-1
 - update to 5.3.3
