@@ -26,7 +26,7 @@
 %endif
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.3
+%global upstream_version 5.3.4
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
@@ -288,6 +288,9 @@ exit $ret
 
 
 %changelog
+* Thu Mar 25 2021 Remi Collet <remi@remirepo.net> - 5.3.4-1
+- update to 5.3.4
+
 * Wed Feb  3 2021 Remi Collet <remi@remirepo.net> - 5.3.3-1
 - update to 5.3.3
 
