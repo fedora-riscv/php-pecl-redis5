@@ -24,26 +24,20 @@
 %bcond_with         tests
 %endif
 %endif
-%if 0%{?fedora}
 %bcond_without      lzf
-%else
-%bcond_with         lzf
-%endif
 
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.4
+%global upstream_version 5.3.5
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       2%{?dist}
+Release:       1%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
-
-Patch0:        %{pecl_name}-32-bit.patch
 
 BuildRequires: make
 BuildRequires: gcc
@@ -117,8 +111,6 @@ cd NTS
 %if %{with lzf}
 rm -r liblzf
 %endif
-
-%patch0 -p1
 
 # Sanity check, really often broken
 extver=$(sed -n '/#define PHP_REDIS_VERSION/{s/.* "//;s/".*$//;p}' php_redis.h)
@@ -308,6 +300,10 @@ exit $ret
 
 
 %changelog
+* Mon Dec 20 2021 Remi Collet <remi@remirepo.net> - 5.3.5-1
+- update to 5.3.5
+- drop patch merged upstream
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.3.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
