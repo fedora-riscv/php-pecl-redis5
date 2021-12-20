@@ -18,26 +18,26 @@
 %ifarch s390x
 %bcond_with         tests
 %else
-%if 0%{?fedora} >= 33
+%if 0%{?fedora} >= 33 || 0%{?rhel} >= 9
 %bcond_without      tests
 %else
 %bcond_with         tests
 %endif
 %endif
+%bcond_without      lzf
+
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.4
+%global upstream_version 5.3.5
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       2%{?dist}
+Release:       1%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
-
-Patch0:        %{pecl_name}-32-bit.patch
 
 BuildRequires: make
 BuildRequires: gcc
@@ -46,7 +46,11 @@ BuildRequires: php-pear
 BuildRequires: php-json
 BuildRequires: php-pecl-igbinary-devel
 BuildRequires: php-pecl-msgpack-devel >= 2.0.3
+%if %{with lzf}
 BuildRequires: pkgconfig(liblzf)
+%else
+Provides:      bundled(liblzf) = 3.6
+%endif
 BuildRequires: pkgconfig(libzstd) >= 1.3.0
 BuildRequires: pkgconfig(liblz4)
 # to run Test suite
@@ -97,13 +101,16 @@ mv %{pecl_name}-%{upstream_version}%{?upstream_prever} NTS
 # Don't install/register tests, license, and bundled library
 sed -e 's/role="test"/role="src"/' \
     -e '/COPYING/s/role="doc"/role="src"/' \
+%if %{with lzf}
     -e '/liblzf/d' \
+%endif
     -i package.xml
 
 cd NTS
 # Use system library
+%if %{with lzf}
 rm -r liblzf
-%patch0 -p1
+%endif
 
 # Sanity check, really often broken
 extver=$(sed -n '/#define PHP_REDIS_VERSION/{s/.* "//;s/".*$//;p}' php_redis.h)
@@ -176,7 +183,9 @@ peclconf() {
     --enable-redis-igbinary \
     --enable-redis-msgpack \
     --enable-redis-lzf \
+%if %{with lzf}
     --with-liblzf \
+%endif
     --enable-redis-zstd \
     --with-libzstd \
     --enable-redis-lz4 \
@@ -291,6 +300,10 @@ exit $ret
 
 
 %changelog
+* Mon Dec 20 2021 Remi Collet <remi@remirepo.net> - 5.3.5-1
+- update to 5.3.5
+- drop patch merged upstream
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 5.3.4-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
