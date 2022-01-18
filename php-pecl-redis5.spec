@@ -3,7 +3,7 @@
 #
 # remirepo spec file for php-pecl-redis5
 #
-# Copyright (c) 2012-2021 Remi Collet
+# Copyright (c) 2012-2022 Remi Collet
 # License: CC-BY-SA
 # http://creativecommons.org/licenses/by-sa/4.0/
 #
@@ -28,7 +28,7 @@
 
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.5
+%global upstream_version 5.3.6
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
@@ -240,12 +240,12 @@ DEPS="$DEPS --define extension=msgpack.so"
 
 %{__php} $DEPS \
     --define extension=%{buildroot}%{php_extdir}/%{pecl_name}.so \
-    --modules | grep %{pecl_name}
+    --modules | grep '^%{pecl_name}$'
 
 %if %{with_zts}
 %{__ztsphp} $DEPS \
     --define extension=%{buildroot}%{php_ztsextdir}/%{pecl_name}.so \
-    --modules | grep %{pecl_name}
+    --modules | grep '^%{pecl_name}$'
 %endif
 
 %if %{with tests}
@@ -300,6 +300,9 @@ exit $ret
 
 
 %changelog
+* Tue Jan 18 2022 Remi Collet <remi@remirepo.net> - 5.3.6-1
+- update to 5.3.6
+
 * Mon Dec 20 2021 Remi Collet <remi@remirepo.net> - 5.3.5-1
 - update to 5.3.5
 - drop patch merged upstream
