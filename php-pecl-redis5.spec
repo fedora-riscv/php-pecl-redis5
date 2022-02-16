@@ -28,13 +28,13 @@
 
 # after 20-json, 40-igbinary and 40-msgpack
 %global ini_name    50-%{pecl_name}.ini
-%global upstream_version 5.3.6
+%global upstream_version 5.3.7
 #global upstream_prever  RC2
 
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       2%{?dist}
+Release:       1%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
@@ -300,6 +300,9 @@ exit $ret
 
 
 %changelog
+* Wed Feb 16 2022 Remi Collet <remi@remirepo.net> - 5.3.7-1
+- update to 5.3.7
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 5.3.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
