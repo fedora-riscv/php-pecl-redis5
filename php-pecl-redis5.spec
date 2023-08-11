@@ -15,7 +15,7 @@
 
 %global pecl_name   redis
 %global with_zts    0%{!?_without_zts:%{?__ztsphp:1}}
-%ifarch s390x ppc64le
+%ifarch s390x ppc64le riscv64
 %bcond_with         tests
 %else
 %if 0%{?fedora} >= 33 || 0%{?rhel} >= 9
@@ -34,7 +34,7 @@
 Summary:       Extension for communicating with the Redis key-value store
 Name:          php-pecl-redis5
 Version:       %{upstream_version}%{?upstream_prever:~%{upstream_prever}}
-Release:       3%{?dist}
+Release:       3.rv64%{?dist}
 Source0:       https://pecl.php.net/get/%{pecl_name}-%{upstream_version}%{?upstream_prever}.tgz
 License:       PHP
 URL:           https://pecl.php.net/package/redis
@@ -300,6 +300,9 @@ exit $ret
 
 
 %changelog
+* Fri Aug 11 2023 Songsong Zhang <U2FsdGVkX1@gmail.com> - 5.3.7-3
+- Add riscv64 support
+
 * Wed Oct 05 2022 Remi Collet <remi@remirepo.net> - 5.3.7-3
 - rebuild for https://fedoraproject.org/wiki/Changes/php82
 
